@@ -1,0 +1,43 @@
+<div class="container ">
+  <h1>Ukiyo App Demo</h1>
+  <section class="buttons-container d-flex flex-row justify-content-between w-25">
+    <button class="btn btn-outline-danger">Delete</button>
+    <button class="btn btn-outline-secondary">Update</button>
+    <button class="btn btn-outline-info">Create</button>
+  </section>
+  <table class="table w-full mt-5">
+    <thead>
+    <tr>
+      <th>Select</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>Company Name</th>
+      <th>Address</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let person of persons" class="table-row">
+      <td><input type="checkbox"></td>
+      <td><i class="bi bi-arrow-right-short" (click)="expand($event)"></i>{{person.name}}</td>
+      <td>{{person.type}}</td>
+      <td>{{person.email}}</td>
+      <td>{{person.phoneNo}}</td>
+      <td>{{person.companyName}}</td>
+      <td>{{person.address}}</td>
+<!--      <div *ngIf="person.children?.length">-->
+<!--        <table *ngFor="let child of person.children">-->
+<!--          <td><input type="checkbox"></td>-->
+<!--          <td><i class="bi bi-arrow-right-short" (click)="expand($event)"></i>{{child.name}}</td>-->
+<!--          <td>{{child.type}}</td>-->
+<!--          <td>{{child.email}}</td>-->
+<!--          <td>{{child.phoneNo}}</td>-->
+<!--          <td>{{child.companyName}}</td>-->
+<!--          <td>{{child.address}}</td>-->
+<!--        </table>-->
+<!--      </div>-->
+    </tr>
+    </tbody>
+  </table>
+</div>
