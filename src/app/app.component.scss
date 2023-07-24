@@ -5,16 +5,41 @@
     border-right: 1px solid #e0e0e0;
   }
 
-  .table-row:hover {
-    background-color: #000;
+  .search-box {
+    margin-bottom: 1rem;
+    min-width: 15%;
   }
-  .sub-table{
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
+
+  .button-container {
+    min-width: 200px;
   }
+
+  .form-check-input {
+    width: 20px;
+    height: 20px;
+  }
+
+  tr.table-row:hover {
+    border-bottom: 1px solid #e0e0e0 !important;
+    background: #aaf !important;
+  }
+
+  .table-row {
+    min-height: 500px;
+
+
+    .button-group {
+      min-width: 100px;
+      visibility: hidden;
+    }
+
+    &:hover {
+      .button-group {
+        visibility: visible;
+      }
+
+    }
+  }
+
+
 }
-
-

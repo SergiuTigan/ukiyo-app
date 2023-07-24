@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { IPerson } from '../../../Shared/interfaces/person.model';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +12,33 @@ export class PersonService {
   }
 
   getPersons(): Observable<IPerson[]> {
-    return this.firestore.collection<IPerson>('persons').valueChanges();
+    return this.firestore.collection<IPerson>('persons',
+        ref => ref.orderBy('name', 'asc')).
+    valueChanges({ idField: 'id' }).pipe(map(persons => {
+      return persons.map(person => {
+        return {
+          ...person,
+          children: person.children ?? []
+        };
+      });
+    }));
   }
 
   writePerson(person: IPerson): any {
-    this.firestore.collection<IPerson>('persons').add(person).then();
+    const docRef = this.firestore.collection('persons').doc();
+    person = { ...person,
+      id: docRef.ref.id };
+    docRef.set(person).then();
+  }
+
+  deletePerson(person: IPerson): any {
+    const docRef = this.firestore.doc(`persons/${person.id}`);
+    docRef.delete().then();
+  }
+
+  updatePerson(person: IPerson, personId: string): any {
+    const docRef = this.firestore.doc(`persons/${personId}`);
+    docRef.update(person).then();
   }
 
 }

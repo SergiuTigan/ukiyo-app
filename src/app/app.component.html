@@ -1,16 +1,19 @@
-<div class="container ">
+<div class="container mt-5">
   <h1>Ukiyo App Demo</h1>
-  <section class="buttons-container d-flex flex-row justify-content-between w-25">
-    <button class="btn btn-outline-danger">Delete</button>
-    <button class="btn btn-outline-secondary">Update</button>
-    <button class="btn btn-outline-info">Create</button>
-  </section>
-  <table class="table w-full mt-5">
+  <div class="d-flex justify-content-between">
+    <section class="buttons-container d-flex flex-row justify-content-between w-25">
+      <button class="btn btn-outline-info" (click)="createPerson()">Create</button>
+    </section>
+    <section class="search-box d-flex justify-content-between" [formGroup]="searchForm">
+      <input type="text" placeholder="Input a search term..." formControlName="searchTerm">
+    </section>
+  </div>
+  <table class="table table-bordered table-striped">
     <thead>
     <tr>
       <th>Select</th>
-      <th>First Name</th>
-      <th>Last Name</th>
+      <th>Name</th>
+      <th>Type</th>
       <th>Email</th>
       <th>Phone Number</th>
       <th>Company Name</th>
@@ -19,24 +22,19 @@
     </thead>
     <tbody>
     <tr *ngFor="let person of persons" class="table-row">
-      <td><input type="checkbox"></td>
-      <td><i class="bi bi-arrow-right-short" (click)="expand($event)"></i>{{person.name}}</td>
-      <td>{{person.type}}</td>
-      <td>{{person.email}}</td>
-      <td>{{person.phoneNo}}</td>
-      <td>{{person.companyName}}</td>
-      <td>{{person.address}}</td>
-<!--      <div *ngIf="person.children?.length">-->
-<!--        <table *ngFor="let child of person.children">-->
-<!--          <td><input type="checkbox"></td>-->
-<!--          <td><i class="bi bi-arrow-right-short" (click)="expand($event)"></i>{{child.name}}</td>-->
-<!--          <td>{{child.type}}</td>-->
-<!--          <td>{{child.email}}</td>-->
-<!--          <td>{{child.phoneNo}}</td>-->
-<!--          <td>{{child.companyName}}</td>-->
-<!--          <td>{{child.address}}</td>-->
-<!--        </table>-->
-<!--      </div>-->
+      <td class="d-flex justify-content-between button-container" headers="Select">
+        <input type="checkbox" class="form-check-input"/>
+        <div class="d-flex button-group justify-content-between">
+          <button class="btn btn-outline-danger" (click)="deleteRecord(person)"><i class="bi bi-trash"></i></button>
+          <button class="btn btn-outline-secondary" (click)="updateRecord(person)"><i class="bi bi-pencil"></i></button>
+        </div>
+      </td>
+      <td headers="Name"><i class="bi bi-arrow-right-short" (click)="expand($event)"></i>{{person.name}}</td>
+      <td headers="Type">{{person.type}}</td>
+      <td headers="Email">{{person.email}}</td>
+      <td headers="Phone Number">{{person.phoneNo}}</td>
+      <td headers="Company Name">{{person.companyName}}</td>
+      <td headers="Address">{{person.address}}</td>
     </tr>
     </tbody>
   </table>

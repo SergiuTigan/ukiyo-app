@@ -1,4 +1,5 @@
 export interface IPerson {
+  id?: string;
   name: string;
   type: string;
   email: string;
@@ -8,4 +9,5 @@ export interface IPerson {
   children?: IPerson[];
   checked?: boolean;
   expanded?: boolean;
+  isChild?: boolean;
 }
