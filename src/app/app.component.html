@@ -8,7 +8,7 @@
       <input type="text" placeholder="Input a search term..." formControlName="searchTerm">
     </section>
   </div>
-  <table class="table table-bordered table-striped">
+  <table>
     <thead>
     <tr>
       <th>Select</th>
@@ -21,7 +21,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let person of persons" class="table-row">
+    <tr *ngFor="let person of persons" class="table-row border-black border-bottom ">
       <td class="d-flex justify-content-between button-container" headers="Select">
         <input type="checkbox" class="form-check-input"/>
         <div class="d-flex button-group justify-content-between" *ngIf="!person.isChild">
