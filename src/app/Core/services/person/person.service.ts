@@ -13,9 +13,11 @@ export class PersonService {
 
   getPersons(): Observable<IPerson[]> {
     return this.firestore.collection<IPerson>('persons',
-        ref => ref.orderBy('name', 'asc')).
-    valueChanges({ idField: 'id' }).pipe(map(persons => {
+      ref => ref.orderBy('name', 'asc')).valueChanges({ idField: 'id' }).pipe(map(persons => {
       return persons.map(person => {
+        person.children?.map(child => {
+          child.isChild = true;
+        });
         return {
           ...person,
           children: person.children ?? []
@@ -26,8 +28,10 @@ export class PersonService {
 
   writePerson(person: IPerson): any {
     const docRef = this.firestore.collection('persons').doc();
-    person = { ...person,
-      id: docRef.ref.id };
+    person = {
+      ...person,
+      id: docRef.ref.id
+    };
     docRef.set(person).then();
   }
 

@@ -24,7 +24,7 @@
     <tr *ngFor="let person of persons" class="table-row">
       <td class="d-flex justify-content-between button-container" headers="Select">
         <input type="checkbox" class="form-check-input"/>
-        <div class="d-flex button-group justify-content-between">
+        <div class="d-flex button-group justify-content-between" *ngIf="!person.isChild">
           <button class="btn btn-outline-danger" (click)="deleteRecord(person)"><i class="bi bi-trash"></i></button>
           <button class="btn btn-outline-secondary" (click)="updateRecord(person)"><i class="bi bi-pencil"></i></button>
         </div>
